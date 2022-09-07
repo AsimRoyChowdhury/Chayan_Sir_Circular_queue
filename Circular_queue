@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+int frnt = -1, rear = -1, cir_queue[5];
+int Enqueue();
+void Dequeue();
+void Display();
+void queue_display();
+
+int main()
+{
+    int choice;
+
+    while(true){
+    printf("        Enter 1 for Enqueue\n       Enter 2 for Dequeue\n       Enter 3 for Display\n       Enter 4 to display circular queue\n       Enter 5 to exit\n");
+    printf("Enter your choice = ");
+    scanf("%d", &choice);
+    switch (choice){
+        case 1:
+        Enqueue();
+        break;
+
+        case 2:
+        Dequeue();
+        break;
+
+        case 3:
+        Display();
+        break;
+
+        case 4:
+        queue_display();
+        break;
+
+        case 5:
+        exit(0);
+
+        default:
+        printf("!!!!Wrong choice!!!!");
+        }
+        }
+    return 0;
+}
+
+int Enqueue(){
+    if((rear+1)%5 == frnt){
+        printf("Queue is full!!!\n");
+    }
+    else{
+        int i;
+        printf("Enter value to enqueue = ");
+        scanf("%d", &i);
+        printf("%d entered in queue\n", i);
+        rear = (rear+1)%5;
+        cir_queue[rear] = i;
+        if(frnt==-1) frnt = 0;
+    }
+}
+
+void Dequeue(){
+    if(frnt==-1){
+        printf("Queue is empty!!!\n");
+    }
+    else if(frnt==rear){
+        printf("Dequeued %d\n", cir_queue[frnt]);
+        frnt = rear = -1;
+    }
+    else{
+        printf("Dequeued %d\n", cir_queue[frnt]);
+        frnt = (frnt+1)%5;
+    }
+}
+
+void Display(){
+    if(frnt==-1){
+        printf("Queue is empty!!!\n");
+    }
+    else{
+        printf("Displaying %d\n", cir_queue[frnt]);
+    }
+}
+
+void queue_display(){
+    printf("\n\n\n        %d\n\n   %d         %d\n\n     %d     %d\n\n\n", cir_queue[0], cir_queue[4], cir_queue[1], cir_queue[3], cir_queue[2]);
+}
