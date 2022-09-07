@@ -65,10 +65,12 @@ void Dequeue(){
     }
     else if(frnt==rear){
         printf("Dequeued %d\n", cir_queue[frnt]);
+        cir_queue[frnt] = 0;
         frnt = rear = -1;
     }
     else{
         printf("Dequeued %d\n", cir_queue[frnt]);
+        cir_queue[frnt] = 0;
         frnt = (frnt+1)%5;
     }
 }
